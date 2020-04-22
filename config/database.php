@@ -6,7 +6,7 @@ class Database {
   private $db_name = 'api';
   private $username = '';
   private $passwd = '';
-  private $driver = 'psql';
+  private $driver = 'pgsql';
   public $conn = '';
 
   // get the database connection
