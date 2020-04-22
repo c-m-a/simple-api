@@ -20,7 +20,7 @@ $num = $stmt->rowCount();
 if($num > 0) {
 
   // products array
-  $citizens[]['records'] = array();
+  $citizens['citizens'] = array();
 
   // retrieve our table contents
   // fetch() is faster than fetchAll()
@@ -38,10 +38,12 @@ if($num > 0) {
       'email' => $email,
       'mobile_phone' => $mobile_phone,
       'dob' => $dob,
-      'filename' => $filename
+      'filename' => $filename,
+      'created_at' => $created_at,
+      'updated_at' => $updated_at
     );
 
-    array_push($citizens['records'], $citizen);
+    $citizens['citizens'][] = $citizen;
   }
 
   // set response code - 200 OK
