@@ -3,7 +3,6 @@
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 
-// database connection will be here
 include_once '../config/database.php';
 include_once '../models/citizen.php';
 
