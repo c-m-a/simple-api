@@ -27,8 +27,7 @@ $all_fields_sent = !(empty(trim($data->full_name)) &&
   empty(trim($data->document_type)) &&
   empty(trim($data->filename)) &&
   empty(trim($data->dob)) &&
-  empty(trim($data->mobile_phone)) &&
-  empty(trim($data->full_name)) &&
+  empty(trim($data->mobile_phone))
 );
 
 if ($all_fields_sent) {
@@ -37,11 +36,12 @@ if ($all_fields_sent) {
   $citizen->last_name = $data->last_name;
   $citizen->document_number = $data->document_number;
   $citizen->document_type = $data->document_type;
-  $citizen->dob = $data->dob;
+  $citizen->dob = date('Y-m-d', strtotime($data->dob));
   $citizen->mobile_phone = $data->mobile_phone;
+  $citizen->filename = $data->filename;
 
   // create the citizen
-  if($citizen->create()){
+  if($citizen->create()) {
 
     // set response code - 201 created
     http_response_code(201);
