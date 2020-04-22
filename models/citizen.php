@@ -30,18 +30,17 @@ class Citizen {
   function create() {
 
     // Create insert query
-    $query = 'INSERT INTO' . $this->table_name .
-      'SET
-        full_name = :full_name,
-        last_name = :last_name,
-        document_number = :document_number,
-        document_type = :document_type,
-        email = :email,
-        mobile_phone = :mobile_phone,
-        dob = :dob,
-        filename = :filename';
+    $query = "INSERT INTO " .
+      $this->table_name .
+      " (full_name, last_name, document_number, document_type, email,
+          mobile_phone, dob, filename)
+        VALUES
+          (:full_name, :last_name, :document_number, :document_type, :email,
+          :mobile_phone, :dob, :filename)";
 
     // Prepare query
+    $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $this->conn->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
     $stmt = $this->conn->prepare($query);
 
     // Sanitize
@@ -51,7 +50,6 @@ class Citizen {
     $this->document_type = htmlspecialchars(strip_tags($this->document_type));
     $this->email = htmlspecialchars(strip_tags($this->email));
     $this->mobile_phone = htmlspecialchars(strip_tags($this->mobile_phone));
-    $this->dob = htmlspecialchars(strip_tags($this->dob));
     $this->filename = htmlspecialchars(strip_tags($this->filename));
 
     // bind values
