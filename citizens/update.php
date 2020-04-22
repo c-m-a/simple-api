@@ -34,7 +34,6 @@ $citizen->filename = $data->filename;
 
 // update the citizen
 if($citizen->update()){
-
   // set response code - 200 ok
   http_response_code(200);
 
