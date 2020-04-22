@@ -51,3 +51,6 @@ ALTER TABLE ONLY public.citizens ALTER COLUMN id SET DEFAULT nextval('public.cit
 
 ALTER TABLE ONLY public.citizens
     ADD CONSTRAINT citizens_pkey PRIMARY KEY (id);
+
+ALTER TABLE citizens ALTER COLUMN created_at SET DEFAULT now();
+ALTER TABLE citizens ALTER COLUMN updated_at SET DEFAULT now();
