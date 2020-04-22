@@ -66,4 +66,52 @@ class Citizen {
 
     return false;
   }
+
+  function update() {
+
+    // Create insert query
+    $query = 'UPDATE ' .
+      $this->table_name .
+      ' SET
+          full_name = :full_name,
+          last_name = :last_name,
+          document_number = :document_number,
+          document_type = :document_type,
+          email = :email,
+          mobile_phone = :mobile_phone,
+          dob = :dob,
+          filename = :filename
+        WHERE
+          id = :id';
+
+    // Prepare query
+    $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $this->conn->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+    $stmt = $this->conn->prepare($query);
+
+    // Sanitize
+    $this->id = htmlspecialchars(strip_tags($this->id));
+    $this->full_name = htmlspecialchars(strip_tags($this->full_name));
+    $this->last_name = htmlspecialchars(strip_tags($this->last_name));
+    $this->document_number = htmlspecialchars(strip_tags($this->document_number));
+    $this->document_type = htmlspecialchars(strip_tags($this->document_type));
+    $this->email = htmlspecialchars(strip_tags($this->email));
+    $this->mobile_phone = htmlspecialchars(strip_tags($this->mobile_phone));
+    $this->filename = htmlspecialchars(strip_tags($this->filename));
+
+    // bind values
+    $stmt->bindParam(':id', $this->id);
+    $stmt->bindParam(':full_name', $this->full_name);
+    $stmt->bindParam(':last_name', $this->last_name);
+    $stmt->bindParam(':document_number', $this->document_number);
+    $stmt->bindParam(':document_type', $this->document_type);
+    $stmt->bindParam(':email', $this->email);
+    $stmt->bindParam(':mobile_phone', $this->mobile_phone);
+    $stmt->bindParam(':dob', $this->dob);
+    $stmt->bindParam(':filename', $this->filename);
+
+    if ($stmt->execute()) return true;
+
+    return false;
+  }
 }
